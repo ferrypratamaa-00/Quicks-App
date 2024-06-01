@@ -22,11 +22,12 @@ const buttonVariants = cva(
                 primary: "bg-primary text-white",
                 dark: "bg-primary-dark text-white",
                 grey: "bg-primary-grey text-white",
-                light: "bg-primary-light text-white",
+                light: "bg-primary-light text-primary-dark",
                 purple: "bg-indicator-purple text-white",
                 red: "bg-indicator-red text-white",
                 yellow: "bg-indicator-yellow text-white",
                 orange: "bg-indicator-orange text-white",
+                white: "bg-white text-primary-dark",
             },
         },
         defaultVariants: {
