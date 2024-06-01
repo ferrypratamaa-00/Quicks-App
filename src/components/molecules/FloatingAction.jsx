@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../atoms/Button";
 import Icon from "../atoms/Icon";
 import InboxIcon from "../../assets/icons/Group 1906.svg";
 import InboxActiveIcon from "../../assets/icons/Group 1908.svg";
@@ -33,7 +33,7 @@ const ActionButton = ({
                 </p>
             )}
             <Button
-                variant="circle"
+                shape="circle"
                 size="icon"
                 color={open ? color : "white"}
                 className={open ? shadow : ""}
@@ -95,7 +95,7 @@ export default function FloatingAction({ state, onToggleClick }) {
             {!state.openTask && !state.openInbox && (
                 <Button
                     key={3}
-                    variant="circle"
+                    shape="circle"
                     size="icon"
                     onClick={() =>
                         onToggleClick("openAction", !state.openAction)
