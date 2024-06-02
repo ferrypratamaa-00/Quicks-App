@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useDebounce } from "use-debounce";
 import Search from "../Search";
+import Icon from "@/components/atoms/Icon";
+import searchIcon from "@/assets/icons/Group 1609.svg";
 
 const formSchema = z.object({
     keyword: z
@@ -59,7 +61,12 @@ export default function Navbar({ toggleSidebar }) {
                 </svg>
             </button>
             <div className="flex flex-row items-center w-full bg-primary-grey hover:bg-[#666666] transform transition-all px-4">
-                <Search control={control} />
+                <Search
+                    control={control}
+                    className={`bg-transparent h-10 px-3 py-2 text-white`}
+                >
+                    <Icon src={searchIcon} />
+                </Search>
             </div>
         </div>
     );
