@@ -1,6 +1,6 @@
 import React from "react";
 import backIcon from "@/assets/icons/Group 1921.svg";
-import closeIcon from "@/assets/icons/icon/navigation/close_24px _dark.svg";
+import closeIcon from "@/assets/icons/icon/navigation/close_24px_dark.svg";
 import Icon from "@/components/atoms/Icon";
 import { Button } from "@/components/atoms/Button";
 
