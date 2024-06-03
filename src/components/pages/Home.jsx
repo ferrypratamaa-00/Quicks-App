@@ -8,13 +8,71 @@ import { z } from "zod";
 import Inbox from "../organisms/chat/Inbox";
 import { useSpring, animated } from "@react-spring/web";
 import InboxDetail from "../organisms/chat/InboxDetail";
+import { useQuery } from "react-query";
+import { getInboxs } from "@/api/api";
 
 const formSchema = z.object({
     keyword: z
         .string()
-        .min(1, { message: "Keyword must be at least 2 characters." })
+        .min(2, { message: "Keyword must be at least 2 characters." })
         .max(50),
 });
+
+const useInboxData = (openInbox) => {
+    const { isLoading, error, data, refetch } = useQuery({
+        queryKey: ["inboxs"],
+        queryFn: getInboxs,
+        staleTime: Infinity,
+        enabled: openInbox,
+    });
+
+    useEffect(() => {
+        if (openInbox) {
+            refetch(); // refetch harus dipanggil sebagai fungsi
+        }
+    }, [openInbox, refetch]);
+    return { isLoading, error, data };
+};
+
+const useKeywordSearch = () => {
+    const { control, watch } = useForm({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            keyword: "",
+        },
+    });
+
+    const keyword = watch("keyword");
+
+    return { keyword, control };
+};
+
+const useFilteredData = (inboxs, debouncedKeyword) => {
+    const [filteredData, setFilteredData] = useState([]);
+
+    useEffect(() => {
+        if (debouncedKeyword.length > 2) {
+            const filtered = inboxs.filter((item) =>
+                item.name.toLowerCase().includes(debouncedKeyword.toLowerCase())
+            );
+            setFilteredData(filtered);
+        } else {
+            setFilteredData(inboxs);
+        }
+    }, [debouncedKeyword, inboxs]);
+
+    return filteredData;
+};
+
+const useModalAnimation = (openInbox) => {
+    const modalAnimation = useSpring({
+        opacity: openInbox ? 1 : 0,
+        transform: openInbox ? "scale(1)" : "scale(0.9)",
+        config: { tension: 300, friction: 20 },
+    });
+
+    return modalAnimation;
+};
 
 export default function Home() {
     const [floatingState, setFloatingState] = useState({
@@ -32,41 +90,18 @@ export default function Home() {
         }));
     };
 
-    const keywordHandle = (search) => {
-        try {
-            if (search.keyword.length > 2) {
-                console.log(search);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const search = useKeywordSearch();
 
-    const { control, watch } = useForm({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            keyword: "",
-        },
-    });
+    const [debouncedKeyword] = useDebounce(search.keyword, 1000);
 
-    const keyword = watch("keyword");
-    const [debouncedKeyword] = useDebounce(keyword, 300);
+    const inboxs = useInboxData(floatingState.openInbox);
 
-    useEffect(() => {
-        if (debouncedKeyword) {
-            keywordHandle({ keyword: debouncedKeyword });
-        }
-    }, [debouncedKeyword]);
+    const filteredData = useFilteredData(inboxs.data || [], debouncedKeyword);
 
-    const modalAnimation = useSpring({
-        opacity: floatingState.openInbox ? 1 : 0,
-        transform: floatingState.openInbox ? "scale(1)" : "scale(0.9)",
-        config: { tension: 300, friction: 20 },
-    });
+    const modalAnimation = useModalAnimation(floatingState.openInbox);
 
-    useEffect(() => {
-        console.table(floatingState);
-    }, [floatingState]);
+    const inboxsData = filteredData;
+
     return (
         <MainTemplate>
             {floatingState.openInbox && (
@@ -82,7 +117,10 @@ export default function Home() {
                         />
                     ) : (
                         <Inbox
-                            control={control}
+                            isLoading={inboxs.isLoading}
+                            error={inboxs.error}
+                            data={inboxsData}
+                            control={search.control}
                             state={floatingState}
                             onToggleClick={handleToggleClick}
                         />
@@ -95,7 +133,7 @@ export default function Home() {
                     id="chat-box"
                     className="fixed bottom-20 right-5 bg-white border rounded-md w-full md:w-96 h-96"
                 >
-                    {/* <Inbox control={control} /> */}
+                    {/* Content for tasks goes here */}
                 </animated.div>
             )}
             <FloatingAction

@@ -15,7 +15,7 @@ const InboxItem = ({ isGroup, name, date, message }) => (
                     </span>
                 </p>
                 <p className="text-primary-dark font-bold text-xs mt-1 line-clamp-1">
-                    Nama
+                    {name}
                 </p>
                 <p className="text-primary-dark text-[11px] line-clamp-1">
                     {message}
