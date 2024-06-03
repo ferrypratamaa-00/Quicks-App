@@ -1,149 +1,290 @@
 {
-    "user": {
-        "id": 1,
-        "name": "Ferry Agus Pratama"
-    },
-    "chats": [
+    "users": [
         {
             "id": 1,
-            "group": true,
-            "name": "82322 - Diana SALAZAR MUNGUIA",
-            "messages": [
-                {
-                    "id": 1,
-                    "message": "Hey, please read",
-                    "user": {
-                        "id": 1,
-                        "name": "Ferry Agus Pratama"
-                    },
-                    "created_at": "2024-05-19T20:30:05"
-                },
-                {
-                    "id": 2,
-                    "message": "Got it, thanks!",
-                    "user": {
-                        "id": 2,
-                        "name": "John"
-                    },
-                    "created_at": "2024-05-19T20:35:10"
-                }
-            ]
+            "username": "john_doe",
+            "email": "john@example.com",
+            "password": "hashed_password1",
+            "name": "John Doe",
+            "bio": "A software developer.",
+            "profile_picture": "https://picsum.photos/200/200"
         },
         {
             "id": 2,
-            "group": false,
-            "name": "Private Chat with John",
+            "username": "jane_smith",
+            "email": "jane@example.com",
+            "password": "hashed_password2",
+            "name": "Jane Smith",
+            "bio": "A project manager.",
+            "profile_picture": "https://picsum.photos/200/200"
+        },
+        {
+            "id": 3,
+            "username": "alice_jones",
+            "email": "alice@example.com",
+            "password": "hashed_password3",
+            "name": "Alice Jones",
+            "bio": "A graphic designer.",
+            "profile_picture": "https://picsum.photos/200/200"
+        }
+    ],
+    "chats": [
+        {
+            "id": "1",
+            "name": "Development Team",
+            "type": "group",
+            "members": {
+                "id": "1",
+                "name": "John Doe",
+                "profilePicture": "https://picsum.photos/200/200",
+                "message": {
+                    "id": "1",
+                    "content": "Hello team, let's get started on the new project.",
+                    "isRead": true,
+                    "createdAt": "2024-01-01T10:05:00Z"
+                }
+            }
+        },
+        {
+            "id": "2",
+            "name": "Jane Smith",
+            "type": "direct",
+            "members": {
+                "id": "1",
+                "name": "John Doe",
+                "profilePicture": "https://picsum.photos/200/200",
+                "message": {
+                    "id": "4",
+                    "content": "Hi Jane, can we have a quick call?",
+                    "isRead": false,
+                    "createdAt": "2024-01-03T08:35:00Z"
+                }
+            }
+        },
+        {
+            "id": "3",
+            "name": "Project Management",
+            "type": "group",
+            "members": {
+                "id": "2",
+                "name": "Jane Smith",
+                "profilePicture": "https://picsum.photos/200/200",
+                "message": {
+                    "id": "6",
+                    "content": "We need to finalize the project plan.",
+                    "isRead": true,
+                    "createdAt": "2024-02-01T09:20:00Z"
+                }
+            }
+        },
+        {
+            "id": "4",
+            "name": "Design Team",
+            "type": "group",
+            "members": {
+                "id": "3",
+                "name": "Alice Jones",
+                "profilePicture": "https://picsum.photos/200/200",
+                "message": {
+                    "id": "8",
+                    "content": "Let's brainstorm ideas for the new project.",
+                    "isRead": false,
+                    "createdAt": "2024-02-15T09:30:00Z"
+                }
+            }
+        }
+    ],
+    "roomChats": [
+        {
+            "id": "1",
+            "name": "Development Team",
+            "isDirect": false,
             "messages": [
                 {
-                    "id": 1,
-                    "message": "Hey, please read",
-                    "user": {
-                        "id": 1,
-                        "name": "Ferry Agus Pratama"
-                    },
-                    "created_at": "2024-05-19T20:30:05"
+                    "id": "1",
+                    "userID": "1",
+                    "content": "Hello team, let's get started on the new project.",
+                    "isRead": true,
+                    "createdAt": "2024-01-01T10:05:00Z",
+                    "fullName": "John Doe",
+                    "profilePicture": "https://picsum.photos/200/200"
                 },
                 {
-                    "id": 2,
-                    "message": "Sure, will do!",
-                    "user": {
-                        "id": 3,
-                        "name": "John"
-                    },
-                    "created_at": "2024-05-19T20:31:15"
+                    "id": "2",
+                    "userID": "2",
+                    "content": "Sure, I'm ready to begin.",
+                    "isRead": true,
+                    "createdAt": "2024-01-01T10:06:00Z",
+                    "fullName": "Jane Smith",
+                    "profilePicture": "https://picsum.photos/200/200"
+                },
+                {
+                    "id": "3",
+                    "userID": "1",
+                    "content": "Let's discuss the initial requirements.",
+                    "isRead": false,
+                    "createdAt": "2024-01-01T10:07:00Z",
+                    "fullName": "John Doe",
+                    "profilePicture": "https://picsum.photos/200/200"
                 }
             ]
         },
         {
-            "id": 3,
-            "group": true,
-            "name": "Project Team - Alpha",
+            "id": "2",
+            "name": "Jane Smith",
+            "isDirect": true,
             "messages": [
                 {
-                    "id": 1,
-                    "message": "Please review the project plan",
-                    "user": {
-                        "id": 4,
-                        "name": "Alice"
-                    },
-                    "created_at": "2024-05-19T20:40:20"
+                    "id": "4",
+                    "userID": "1",
+                    "content": "Hi Jane, can we have a quick call?",
+                    "isRead": false,
+                    "createdAt": "2024-01-03T08:35:00Z",
+                    "fullName": "John Doe",
+                    "profilePicture": "https://picsum.photos/200/200"
                 },
                 {
-                    "id": 2,
-                    "message": "Looks good to me",
-                    "user": {
-                        "id": 5,
-                        "name": "Bob"
-                    },
-                    "created_at": "2024-05-19T20:42:25"
+                    "id": "5",
+                    "userID": "2",
+                    "content": "Sure, give me a minute.",
+                    "isRead": false,
+                    "createdAt": "2024-01-03T08:36:00Z",
+                    "fullName": "Jane Smith",
+                    "profilePicture": "https://picsum.photos/200/200"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Project Management",
+            "isDirect": false,
+            "messages": [
+                {
+                    "id": "6",
+                    "userID": "2",
+                    "content": "We need to finalize the project plan.",
+                    "isRead": true,
+                    "createdAt": "2024-02-01T09:20:00Z",
+                    "fullName": "Jane Smith",
+                    "profilePicture": "https://picsum.photos/200/200"
                 },
                 {
-                    "id": 3,
-                    "message": "I have a few suggestions",
-                    "user": {
-                        "id": 6,
-                        "name": "Charlie"
-                    },
-                    "created_at": "2024-05-19T20:45:30"
+                    "id": "7",
+                    "userID": "3",
+                    "content": "I have updated the timeline accordingly.",
+                    "isRead": false,
+                    "createdAt": "2024-02-01T09:22:00Z",
+                    "fullName": "Alice Jones",
+                    "profilePicture": "https://picsum.photos/200/200"
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "name": "Design Team",
+            "isDirect": false,
+            "messages": [
+                {
+                    "id": "8",
+                    "userID": "3",
+                    "content": "Let's brainstorm ideas for the new project.",
+                    "isRead": false,
+                    "createdAt": "2024-02-15T09:30:00Z",
+                    "fullName": "Alice Jones",
+                    "profilePicture": "https://picsum.photos/200/200"
                 },
                 {
-                    "id": 4,
-                    "message": "Let's discuss those suggestions in the next meeting.",
-                    "user": {
-                        "id": 1,
-                        "name": "Ferry Agus Pratama"
-                    },
-                    "created_at": "2024-05-19T20:47:50"
+                    "id": "9",
+                    "userID": "1",
+                    "content": "Sure, I have some concepts to share.",
+                    "isRead": true,
+                    "createdAt": "2024-02-15T09:35:00Z",
+                    "fullName": "John Doe",
+                    "profilePicture": "https://picsum.photos/200/200"
                 }
             ]
         }
     ],
-    "task_categories": [
+    "taskCategories": [
         {
-            "id": 1,
-            "name": "Personal Errands"
+            "id": "1",
+            "name": "Development"
         },
         {
-            "id": 2,
-            "name": "Urgent To-Do"
+            "id": "2",
+            "name": "Management"
         },
         {
-            "id": 3,
-            "name": "Work Projects"
-        },
-        {
-            "id": 4,
-            "name": "Meetings"
+            "id": "3",
+            "name": "Design"
         }
     ],
     "tasks": [
         {
-            "id": 1,
-            "name": "Close off Case #011293 - RODGRIGUES, Amiguel",
-            "date": "2024-05-12",
-            "description": "Closing off this case, the application has been cancelled.",
-            "isCompleted": false
+            "id": "1",
+            "userId": "1",
+            "taskCategoriesId": "1",
+            "name": "Develop new feature",
+            "date": "2024-01-10T09:00:00Z",
+            "description": "Implement the new feature as discussed.",
+            "isCompleted": false,
+            "createdAt": "2024-01-01T08:00:00Z",
+            "updatedAt": "2024-01-02T10:00:00Z"
         },
         {
-            "id": 2,
-            "name": "Prepare for team meeting",
-            "date": "2024-05-14",
-            "description": "Prepare the agenda and presentation for the team meeting.",
-            "isCompleted": true
+            "id": "2",
+            "userId": "2",
+            "taskCategoriesId": "2",
+            "name": "Create project plan",
+            "date": "2024-01-15T10:00:00Z",
+            "description": "Draft the project plan for the next quarter.",
+            "isCompleted": true,
+            "createdAt": "2024-01-02T09:00:00Z",
+            "updatedAt": "2024-01-05T11:00:00Z"
         },
         {
-            "id": 3,
-            "name": "Buy groceries",
-            "date": "2024-05-15",
-            "description": "Buy milk, bread, and eggs from the supermarket.",
-            "isCompleted": false
+            "id": "3",
+            "userId": "3",
+            "taskCategoriesId": "3",
+            "name": "Design new logo",
+            "date": "2024-02-01T13:00:00Z",
+            "description": "Design a new logo for the marketing campaign.",
+            "isCompleted": false,
+            "createdAt": "2024-01-20T08:30:00Z",
+            "updatedAt": "2024-01-22T10:30:00Z"
         },
         {
-            "id": 4,
-            "name": "Submit project report",
-            "date": "2024-05-16",
-            "description": "Submit the final report for the Alpha project.",
-            "isCompleted": true
+            "id": "4",
+            "userId": "3",
+            "taskCategoriesId": "1",
+            "name": "Revise website layout",
+            "date": "2024-02-20T14:00:00Z",
+            "description": "Make adjustments to improve user experience.",
+            "isCompleted": false,
+            "createdAt": "2024-02-18T11:00:00Z",
+            "updatedAt": null
+        },
+        {
+            "id": "5",
+            "userId": "1",
+            "taskCategoriesId": "2",
+            "name": "Code review",
+            "date": "2024-02-25T10:00:00Z",
+            "description": "Review recent code changes and provide feedback.",
+            "isCompleted": false,
+            "createdAt": "2024-02-22T09:00:00Z",
+            "updatedAt": null
+        },
+        {
+            "id": "6",
+            "userId": "2",
+            "taskCategoriesId": "2",
+            "name": "Prepare monthly report",
+            "date": "2024-03-15T08:00:00Z",
+            "description": "Compile data and analysis for the monthly report.",
+            "isCompleted": false,
+            "createdAt": "2024-03-10T09:00:00Z",
+            "updatedAt": null
         }
     ]
 }
