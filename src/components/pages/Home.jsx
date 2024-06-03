@@ -28,7 +28,7 @@ const useInboxData = (openInbox) => {
 
     useEffect(() => {
         if (openInbox) {
-            refetch(); // refetch harus dipanggil sebagai fungsi
+            refetch();
         }
     }, [openInbox, refetch]);
     return { isLoading, error, data };
@@ -43,8 +43,9 @@ const useKeywordSearch = () => {
     });
 
     const keyword = watch("keyword");
+    const [debouncedKeyword] = useDebounce(keyword, 1000);
 
-    return { keyword, control };
+    return { debouncedKeyword, control };
 };
 
 const useFilteredData = (inboxs, debouncedKeyword) => {
@@ -56,11 +57,8 @@ const useFilteredData = (inboxs, debouncedKeyword) => {
                 item.name.toLowerCase().includes(debouncedKeyword.toLowerCase())
             );
             setFilteredData(filtered);
-        } else {
-            setFilteredData(inboxs);
         }
     }, [debouncedKeyword, inboxs]);
-
     return filteredData;
 };
 
@@ -91,16 +89,10 @@ export default function Home() {
     };
 
     const search = useKeywordSearch();
-
-    const [debouncedKeyword] = useDebounce(search.keyword, 1000);
-
     const inboxs = useInboxData(floatingState.openInbox);
-
-    const filteredData = useFilteredData(inboxs.data || [], debouncedKeyword);
-
+    const filteredData = useFilteredData(inboxs.data, search.debouncedKeyword);
     const modalAnimation = useModalAnimation(floatingState.openInbox);
-
-    const inboxsData = filteredData;
+    const inboxsData = search.debouncedKeyword ? filteredData : inboxs.data;
 
     return (
         <MainTemplate>

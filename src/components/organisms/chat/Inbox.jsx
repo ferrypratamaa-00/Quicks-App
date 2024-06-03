@@ -17,6 +17,7 @@ export default function Inbox({
         <div className="flex flex-col py-6 w-full h-full">
             <div className="px-8 w-full">
                 <div
+                    key={1}
                     id="chat-search"
                     className="border rounded-md border-gray-400 flex items-center px-5 "
                 >
@@ -28,13 +29,14 @@ export default function Inbox({
                     <Icon src={searchIcon} className="h-2 w-2" />
                 </div>
             </div>
-
             <div
+                key={2}
                 className={`overflow-auto ${
-                    isLoading && "flex items-center justify-center h-full"
+                    (isLoading || !data) &&
+                    "flex items-center justify-center h-full"
                 }`}
             >
-                {isLoading ? (
+                {isLoading || !data ? (
                     <Loading className={"text-primary-dark"}>
                         Loading Chats
                     </Loading>
@@ -54,12 +56,7 @@ export default function Inbox({
                                 )
                             }
                         >
-                            <InboxItem
-                                name={item.name}
-                                date={item.date}
-                                message={item.message}
-                                isGroup={item.isGroup}
-                            />
+                            <InboxItem data={item} />
                         </div>
                     ))
                 )}
