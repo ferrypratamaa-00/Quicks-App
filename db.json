@@ -92,22 +92,6 @@
                     "createdAt": "2024-02-15T09:30:00Z"
                 }
             }
-        },
-        {
-            "id": "5",
-            "name": "Marketing Team",
-            "type": "group",
-            "members": {
-                "id": "4",
-                "name": "Mark Johnson",
-                "profilePicture": "https://picsum.photos/200/200",
-                "message": {
-                    "id": "10",
-                    "content": "We need to discuss the upcoming campaign strategy.",
-                    "isRead": false,
-                    "createdAt": "2024-03-05T09:00:00Z"
-                }
-            }
         }
     ],
     "roomChats": [
@@ -216,31 +200,6 @@
                     "isRead": true,
                     "createdAt": "2024-02-15T09:35:00Z",
                     "fullName": "John Doe",
-                    "profilePicture": "https://picsum.photos/200/200"
-                }
-            ]
-        },
-        {
-            "id": "5",
-            "name": "Marketing Team",
-            "isDirect": false,
-            "messages": [
-                {
-                    "id": "10",
-                    "userID": "4",
-                    "content": "We need to discuss the upcoming campaign strategy.",
-                    "isRead": false,
-                    "createdAt": "2024-03-05T09:00:00Z",
-                    "fullName": "Mark Johnson",
-                    "profilePicture": "https://picsum.photos/200/200"
-                },
-                {
-                    "id": "12",
-                    "userID": "6",
-                    "content": "Yes, we should focus on social media engagement.",
-                    "isRead": true,
-                    "createdAt": "2024-03-05T09:10:00Z",
-                    "fullName": "Anna Smith",
                     "profilePicture": "https://picsum.photos/200/200"
                 }
             ]
