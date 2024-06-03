@@ -108,22 +108,6 @@
                     "createdAt": "2024-03-05T09:00:00Z"
                 }
             }
-        },
-        {
-            "id": "6",
-            "name": "Customer Support",
-            "type": "group",
-            "members": {
-                "id": "5",
-                "name": "Emily Rogers",
-                "profilePicture": "https://picsum.photos/200/200",
-                "message": {
-                    "id": "11",
-                    "content": "Are there any urgent issues we need to address?",
-                    "isRead": false,
-                    "createdAt": "2024-03-10T11:30:00Z"
-                }
-            }
         }
     ],
     "roomChats": [
@@ -260,31 +244,6 @@
                     "profilePicture": "https://picsum.photos/200/200"
                 }
             ]
-        },
-        {
-            "id": "6",
-            "name": "Customer Support",
-            "isDirect": false,
-            "messages": [
-                {
-                    "id": "11",
-                    "userID": "5",
-                    "content": "Are there any urgent issues we need to address?",
-                    "isRead": false,
-                    "createdAt": "2024-03-10T11:30:00Z",
-                    "fullName": "Emily Rogers",
-                    "profilePicture": "https://picsum.photos/200/200"
-                },
-                {
-                    "id": "13",
-                    "userID": "7",
-                    "content": "No urgent issues, but we have a few tickets waiting for response.",
-                    "isRead": false,
-                    "createdAt": "2024-03-10T11:35:00Z",
-                    "fullName": "Michael Clark",
-                    "profilePicture": "https://picsum.photos/200/200"
-                }
-            ]
         }
     ],
     "taskCategories": [
@@ -366,17 +325,6 @@
             "description": "Compile data and analysis for the monthly report.",
             "isCompleted": false,
             "createdAt": "2024-03-10T09:00:00Z",
-            "updatedAt": null
-        },
-        {
-            "id": "7",
-            "userId": "3",
-            "taskCategoriesId": "3",
-            "name": "Create new ad campaign",
-            "date": "2024-03-20T10:00:00Z",
-            "description": "Develop creative assets and launch new ad campaign.",
-            "isCompleted": false,
-            "createdAt": "2024-03-12T11:00:00Z",
             "updatedAt": null
         }
     ]
