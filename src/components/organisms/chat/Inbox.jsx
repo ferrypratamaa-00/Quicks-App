@@ -4,15 +4,11 @@ import Search from "@/components/molecules/Search";
 import searchIcon from "@/assets/icons/Group 1610.svg";
 import InboxItem from "./components/InboxItem";
 import Loading from "@/components/molecules/Loading";
+import { useDispatch } from "react-redux";
+import { toggleDetail } from "@/redux/actions/actionMenuSlice";
 
-export default function Inbox({
-    control,
-    state,
-    onToggleClick,
-    data,
-    isLoading,
-    error,
-}) {
+export default function Inbox({ control, data, isLoading, error }) {
+    const dispatch = useDispatch();
     return (
         <div className="flex flex-col py-6 w-full h-full">
             <div className="px-8 w-full">
@@ -37,7 +33,7 @@ export default function Inbox({
                 }`}
             >
                 {isLoading || !data ? (
-                    <Loading className={"text-primary-dark"}>
+                    <Loading className={"text-primary-dark h-6 w-6"}>
                         Loading Chats
                     </Loading>
                 ) : error ? (
@@ -50,9 +46,8 @@ export default function Inbox({
                             id="chat-wrapper"
                             className="w-full border-b pt-[22px] pb-[22px] px-8 cursor-pointer hover:bg-primary-light transform hover:transition-all"
                             onClick={() =>
-                                onToggleClick(
-                                    "openInboxDetail",
-                                    !state.openInboxDetail
+                                dispatch(
+                                    toggleDetail({ key: "inbox", id: item.id })
                                 )
                             }
                         >

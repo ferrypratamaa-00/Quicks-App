@@ -17,6 +17,16 @@ export const getInboxs = async () => {
     }
 };
 
+export const getInbox = async (id) => {
+    try {
+        const response = await api.get(`/roomchats/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching inbox:", error);
+        throw error;
+    }
+};
+
 export const getUser = async () => {
     try {
         const response = await api.get("/user");

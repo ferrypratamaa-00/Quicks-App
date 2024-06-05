@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useDebounce } from "use-debounce";
-import Search from "../Search";
+import Search from "@/components/molecules/Search";
 import Icon from "@/components/atoms/Icon";
 import searchIcon from "@/assets/icons/Group 1609.svg";
 

@@ -2,8 +2,8 @@ import React from "react";
 import InboxIcons from "./InboxIcons";
 
 const InboxItem = ({ data }) => {
-    const { id, name, type, members } = data;
-    const isGroup = type === "group" ?? false;
+    const { name, type, members } = data;
+    const isGroup = type === "group" || false;
 
     return (
         <div className="flex w-full items-center">

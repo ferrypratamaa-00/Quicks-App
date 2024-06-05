@@ -1,6 +1,5 @@
 import React from "react";
 import Icon from "@/components/atoms/Icon";
-import personIcon from "@/assets/icons/Group 1607.svg";
 import personSecondIcon from "@/assets/icons/Group 1608.svg";
 import { getInitials } from "@/utils/stringUtils";
 

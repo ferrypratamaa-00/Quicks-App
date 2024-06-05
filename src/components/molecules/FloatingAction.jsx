@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "../atoms/Button";
-import Icon from "../atoms/Icon";
-import InboxIcon from "../../assets/icons/Group 1906.svg";
-import InboxActiveIcon from "../../assets/icons/Group 1908.svg";
-import TaskIcon from "../../assets/icons/Group 1662.svg";
-import TaskActiveIcon from "../../assets/icons/Group 1907.svg";
+import React from "react";
+import { Button } from "@/components/atoms/Button";
+import Icon from "@/components/atoms/Icon";
+import InboxIcon from "@/assets/icons/Group 1906.svg";
+import InboxActiveIcon from "@/assets/icons/Group 1908.svg";
+import TaskIcon from "@/assets/icons/Group 1662.svg";
+import TaskActiveIcon from "@/assets/icons/Group 1907.svg";
 import { animated, useSpring, useTrail } from "@react-spring/web";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    toggleDetail,
+    toggleFloatingMenu,
+} from "@/redux/actions/actionMenuSlice";
 
 const icons = {
     task: { default: TaskIcon, active: TaskActiveIcon },
@@ -13,94 +18,109 @@ const icons = {
 };
 
 const ActionButton = ({
-    open,
+    isOpen,
+    icon,
+    color,
+    label,
     showCaption,
     onClick,
-    iconType,
-    label,
-    color,
-    shadow,
     style,
 }) => {
+    const shadow =
+        isOpen && "shadow-[-10px_0px_0px_rgba(255,255,255,0.4)] ms-2 h-12 w-12";
+
     return (
         <animated.div
-            className={`relative ${open ? "order-1" : "order-none"}`}
+            className={`relative ${isOpen ? "order-1" : "order-none"}`}
             style={style}
         >
             {showCaption && (
-                <p className="absolute bottom-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white text-xs mb-1.5">
+                <p className="absolute bottom-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white text-xs mb-1.5 capitalize">
                     {label}
                 </p>
             )}
             <Button
                 shape="circle"
                 size="icon"
-                color={open ? color : "white"}
-                className={open ? shadow : ""}
+                color={isOpen ? color : "white"}
+                className={shadow}
                 onClick={onClick}
             >
-                <Icon
-                    src={
-                        open ? icons[iconType].active : icons[iconType].default
-                    }
-                />
+                <Icon src={icon} />
             </Button>
         </animated.div>
     );
 };
 
-export default function FloatingAction({ state, onToggleClick }) {
-    const shadow =
-        "shadow-[-10px_0px_0px_rgba(255,255,255,0.4)] ms-2 h-12 w-12";
+export default function FloatingAction() {
+    const dispatch = useDispatch();
+    const floating = useSelector((state) => state.actionMenu.floating);
 
     const actionAnimation = useSpring({
-        transform: `translateX(${state.openAction ? -1 : 0}rem)`,
+        transform: `translateX(${floating.menu ? -0.25 : 0}rem)`,
         config: { tension: 200, friction: 20 },
     });
 
     const trail = useTrail(2, {
-        opacity: state.openAction ? 1 : 0,
-        transform: state.openAction ? "translateX(0)" : "translateX(1rem)",
+        opacity: floating.menu ? 1 : 0,
+        transform: floating.menu ? "translateX(0)" : "translateX(1rem)",
         from: { opacity: 0, transform: "translateX(1rem)" },
         config: { tension: 200, friction: 20 },
     });
+
+    const toggleMenu = (key, value) => {
+        dispatch(toggleFloatingMenu({ key, value }));
+        dispatch(toggleDetail({ key, id: null }));
+        if (key === "task") {
+            dispatch(toggleFloatingMenu({ key: "inbox", value: false }));
+        } else {
+            dispatch(toggleFloatingMenu({ key: "task", value: false }));
+        }
+    };
+
     return (
-        <div className="fixed bottom-5 right-5 flex flex-row items-center">
+        <animated.div
+            className={`fixed bottom-5 right-5 flex flex-row  gap-x-2 items-center`}
+            style={actionAnimation}
+        >
             <animated.div
                 className="flex flex-row gap-x-3 items-center"
                 style={actionAnimation}
             >
-                {trail.map((props, index) => (
-                    <ActionButton
-                        key={index}
-                        open={index === 0 ? state.openTask : state.openInbox}
-                        showCaption={!state.openTask && !state.openInbox}
-                        onClick={() => {
-                            if (index === 0) {
-                                onToggleClick("openTask", !state.openTask);
-                                onToggleClick("openInbox", false);
-                            } else {
-                                onToggleClick("openInbox", !state.openInbox);
-                                onToggleClick("openTask", false);
-                            }
-                        }}
-                        iconType={index === 0 ? "task" : "inbox"}
-                        label={index === 0 ? "Task" : "Inbox"}
-                        color={index === 0 ? "orange" : "purple"}
-                        shadow={shadow}
-                        style={props}
-                    />
-                ))}
+                {trail.map((props, index) => {
+                    const type = index === 0 ? "task" : "inbox";
+                    const icon = floating[type]
+                        ? icons[type].active
+                        : icons[type].default;
+                    return (
+                        <ActionButton
+                            key={index}
+                            type={type}
+                            label={type}
+                            color={index === 0 ? "orange" : "purple"}
+                            isOpen={floating[type]}
+                            showCaption={!floating.task && !floating.inbox}
+                            onClick={() => toggleMenu(type, !floating[type])}
+                            style={props}
+                            icon={icon}
+                        />
+                    );
+                })}
             </animated.div>
-            {!state.openTask && !state.openInbox && (
+
+            {!floating.task && !floating.inbox && (
                 <Button
-                    key={3}
                     shape="circle"
                     size="icon"
-                    onClick={() =>
-                        onToggleClick("openAction", !state.openAction)
-                    }
                     className="h-12 w-12"
+                    onClick={() =>
+                        dispatch(
+                            toggleFloatingMenu({
+                                key: "menu",
+                                value: !floating.menu,
+                            })
+                        )
+                    }
                 >
                     <svg
                         className="h-7 w-7"
@@ -118,6 +138,6 @@ export default function FloatingAction({ state, onToggleClick }) {
                     </svg>
                 </Button>
             )}
-        </div>
+        </animated.div>
     );
 }
