@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ isOpen, toggleSidebar }) {
     return (
         <div
-            className={`bg-primary-dark border-e border-gray-100 text-white h-screen w-72 md:w-96 flex-col px-10 py-5 ${
+            className={`bg-primary-dark border-e border-gray-100 text-white h-screen w-72 md:w-96 flex-col px-10 pb-5 ${
                 isOpen ? "block" : "hidden"
             } sm:block`}
         >
@@ -28,6 +29,21 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                     />
                 </svg>
             </Button>
+            <div className="h-10 flex flex-col justify-center text-lg font-bold">
+                QUICKS APP
+            </div>
+            <div className="sidebar  text-white py-4">
+                <div className="pt-6">
+                    <ul className="text-sm">
+                        <li className="mb-2 hover:bg-primary-grey p-2 rounded">
+                            <Link to="/">Menu 1</Link>
+                        </li>
+                        <li className="mb-2 hover:bg-primary-grey p-2 rounded">
+                            <Link to="/menu-2">Menu 2</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     );
 }

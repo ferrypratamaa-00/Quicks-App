@@ -38,10 +38,10 @@
                 "name": "John Doe",
                 "profilePicture": "https://picsum.photos/200/200",
                 "message": {
-                    "id": "1",
-                    "content": "Hello team, let's get started on the new project.",
-                    "isRead": true,
-                    "createdAt": "2024-01-01T10:05:00Z"
+                    "id": "3",
+                    "content": "Let's discuss the initial requirements.",
+                    "isRead": false,
+                    "createdAt": "2024-01-01T10:07:00Z"
                 }
             }
         },
@@ -54,10 +54,10 @@
                 "name": "John Doe",
                 "profilePicture": "https://picsum.photos/200/200",
                 "message": {
-                    "id": "4",
-                    "content": "Hi Jane, can we have a quick call?",
+                    "id": "5",
+                    "content": "Sure, give me a minute.",
                     "isRead": false,
-                    "createdAt": "2024-01-03T08:35:00Z"
+                    "createdAt": "2024-01-03T08:36:00Z"
                 }
             }
         },
@@ -70,10 +70,10 @@
                 "name": "Jane Smith",
                 "profilePicture": "https://picsum.photos/200/200",
                 "message": {
-                    "id": "6",
-                    "content": "We need to finalize the project plan.",
-                    "isRead": true,
-                    "createdAt": "2024-02-01T09:20:00Z"
+                    "id": "7",
+                    "content": "I have updated the timeline accordingly.",
+                    "isRead": false,
+                    "createdAt": "2024-02-01T09:22:00Z"
                 }
             }
         },
@@ -86,10 +86,10 @@
                 "name": "Alice Jones",
                 "profilePicture": "https://picsum.photos/200/200",
                 "message": {
-                    "id": "8",
-                    "content": "Let's brainstorm ideas for the new project.",
-                    "isRead": false,
-                    "createdAt": "2024-02-15T09:30:00Z"
+                    "id": "9",
+                    "content": "Sure, I have some concepts to share.",
+                    "isRead": true,
+                    "createdAt": "2024-02-15T09:35:00Z"
                 }
             }
         }
