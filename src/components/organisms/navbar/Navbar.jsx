@@ -16,7 +16,7 @@ const formSchema = z.object({
         .max(50),
 });
 
-export default function Navbar({ toggleSidebar }) {
+export default function Navbar({ className, toggleSidebar }) {
     const keywordHandle = (search) => {
         try {
             if (search.keyword.length > 2) {
@@ -43,7 +43,9 @@ export default function Navbar({ toggleSidebar }) {
     }, [debouncedKeyword]);
 
     return (
-        <div className="text-white flex gap-x-2 md:gap-x-0 items-center justify-between ps-2 pe-0 py-0 md:px-0">
+        <div
+            className={`text-white flex gap-x-2 md:gap-x-0 items-center justify-between ps-2 pe-0 py-0 md:px-0 ${className}`}
+        >
             <button className="sm:hidden" onClick={toggleSidebar}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
