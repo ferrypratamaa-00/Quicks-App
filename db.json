@@ -263,17 +263,6 @@
             "isCompleted": false,
             "createdAt": "2024-02-18T11:00:00Z",
             "updatedAt": null
-        },
-        {
-            "id": "5",
-            "userId": "1",
-            "taskCategoriesId": "2",
-            "name": "Prepare monthly report - Compile data and analysis",
-            "date": "2024-06-15T08:00:00Z",
-            "description": "Compile data and analysis for the monthly report.",
-            "isCompleted": false,
-            "createdAt": "2024-03-10T09:00:00Z",
-            "updatedAt": null
         }
     ]
 }
