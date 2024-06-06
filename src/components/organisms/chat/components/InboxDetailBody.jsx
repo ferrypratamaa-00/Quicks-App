@@ -50,7 +50,7 @@ export default function InboxDetailBody({ messages, handleDelete }) {
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
-    console.log(state.isLoadingAction);
+
     const ActionMenu = () => {
         return (
             <div
