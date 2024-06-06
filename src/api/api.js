@@ -39,7 +39,7 @@ export const getUser = async () => {
 
 export const getTaskCategories = async () => {
     try {
-        const response = await api.get("/task_categories");
+        const response = await api.get("/categories");
         return response.data;
     } catch (error) {
         console.error("Error fetching task categories:", error);
@@ -47,12 +47,22 @@ export const getTaskCategories = async () => {
     }
 };
 
-export const getTasks = async () => {
+export const getTasks = async (id) => {
     try {
-        const response = await api.get("/tasks");
+        const response = await api.get(`/users/${id}/tasks`);
         return response.data;
     } catch (error) {
         console.error("Error fetching tasks:", error);
+        throw error;
+    }
+};
+
+export const getTasksByCategory = async (id) => {
+    try {
+        const response = await api.get(`/categories/${id}/tasks`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching tasks by category:", error);
         throw error;
     }
 };

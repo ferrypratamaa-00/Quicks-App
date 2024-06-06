@@ -9,4 +9,9 @@ const store = configureStore({
     },
 });
 
+store.subscribe(() => {
+    const state = store.getState();
+    console.log("STORE CHANGED : ", state.actionMenu);
+});
+
 export default store;

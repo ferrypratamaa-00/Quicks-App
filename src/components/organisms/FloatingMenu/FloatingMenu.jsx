@@ -12,6 +12,7 @@ import Inbox from "../chat/Inbox";
 import FloatingAction from "@/components/molecules/FloatingAction";
 import { getInbox, getInboxs } from "@/api/api";
 import { useSelector } from "react-redux";
+import Task from "../task/Task";
 
 const formSchema = z.object({
     keyword: z
@@ -76,6 +77,7 @@ const useFilteredData = (inboxs, debouncedKeyword) => {
 };
 
 const useModalAnimation = (open) => {
+    console.log(open);
     const modalAnimation = useSpring({
         opacity: open ? 1 : 0,
         transform: open ? "scale(1)" : "scale(0.9)",
@@ -99,7 +101,7 @@ export default function FloatingMenu() {
     const search = useKeywordSearch();
     const inboxs = useInboxsData(floating.inbox);
     const filteredData = useFilteredData(inboxs.data, search.debouncedKeyword);
-    const modalAnimation = useModalAnimation(floating.inbox);
+    const modalAnimation = useModalAnimation(floating.inbox || floating.task);
 
     const inboxsProcess = (debouncedKeyword) => {
         return debouncedKeyword ? filteredData : inboxs.data;
@@ -108,27 +110,30 @@ export default function FloatingMenu() {
 
     return (
         <>
-            {floating.inbox && (
-                <animated.div
-                    style={modalAnimation}
-                    id="chat-box"
-                    className="fixed bottom-20 right-5 bg-white border rounded-md w-full md:max-w-lg h-[448px]"
-                >
-                    {detail.inbox ? (
-                        <InboxDetail
-                            data={inboxData}
-                            isLoading={inbox.isLoading}
-                        />
-                    ) : (
-                        <Inbox
-                            isLoading={inboxs.isLoading}
-                            error={inboxs.error}
-                            data={inboxsData}
-                            control={search.control}
-                        />
-                    )}
-                </animated.div>
-            )}
+            <animated.div
+                style={modalAnimation}
+                id="chat-box"
+                className="fixed bottom-20 right-5 bg-white border rounded-md w-full md:max-w-lg h-[448px]"
+            >
+                {floating.inbox && (
+                    <>
+                        {detail.inbox ? (
+                            <InboxDetail
+                                data={inboxData}
+                                isLoading={inbox.isLoading}
+                            />
+                        ) : (
+                            <Inbox
+                                isLoading={inboxs.isLoading}
+                                error={inboxs.error}
+                                data={inboxsData}
+                                control={search.control}
+                            />
+                        )}
+                    </>
+                )}
+                {floating.task && <Task />}
+            </animated.div>
             <FloatingAction />
         </>
     );
