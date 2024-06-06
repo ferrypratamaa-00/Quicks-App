@@ -274,17 +274,6 @@
             "isCompleted": false,
             "createdAt": "2024-03-10T09:00:00Z",
             "updatedAt": null
-        },
-        {
-            "id": "6",
-            "userId": "2",
-            "taskCategoriesId": "2",
-            "name": "Draft project plan - Prepare for next quarter",
-            "date": "2024-03-15T08:00:00Z",
-            "description": "Draft the project plan for the next quarter.",
-            "isCompleted": false,
-            "createdAt": "2024-03-10T09:00:00Z",
-            "updatedAt": null
         }
     ]
 }
