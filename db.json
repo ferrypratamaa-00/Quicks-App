@@ -205,7 +205,7 @@
             ]
         }
     ],
-    "taskCategories": [
+    "categories": [
         {
             "id": "1",
             "name": "Development"
@@ -223,7 +223,7 @@
         {
             "id": "1",
             "usersId": "1",
-            "taskCategoriesId": "2",
+            "categoriesId": "2",
             "name": "Code review - Enhance code quality and provide feedback",
             "date": "2024-07-25T10:00:00Z",
             "description": "Review recent code changes and provide feedback.",
@@ -234,7 +234,7 @@
         {
             "id": "2",
             "usersId": "1",
-            "taskCategoriesId": "3",
+            "categoriesId": "3",
             "name": "Design new logo - Create a captivating logo",
             "date": "2024-07-01T13:00:00Z",
             "description": "Design a new logo for the marketing campaign.",
@@ -245,7 +245,7 @@
         {
             "id": "3",
             "usersId": "1",
-            "taskCategoriesId": "1",
+            "categoriesId": "1",
             "name": "Develop new feature - Implement new feature based on specifications",
             "date": "2024-07-10T09:00:00Z",
             "description": "Implement the new feature as discussed.",
@@ -256,7 +256,7 @@
         {
             "id": "4",
             "usersId": "2",
-            "taskCategoriesId": "1",
+            "categoriesId": "1",
             "name": "Revise website layout - Improve user experience",
             "date": "2024-06-20T14:00:00Z",
             "description": "Make adjustments to improve user experience.",
