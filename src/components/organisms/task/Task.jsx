@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
     Select,
     SelectContent,
@@ -76,6 +76,7 @@ const tasksProcess = (tasks, newItem) => {
 
 export default function Task() {
     const dispatch = useDispatch();
+    const containerRef = useRef(null);
     const task = useSelector((state) => state.actionMenu.floating.task);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const handleCategoryChange = (event) => {
@@ -90,7 +91,16 @@ export default function Task() {
 
     const [newItems, setNewItems] = useState([]);
 
+    const scrollToBottom = () => {
+        const section = containerRef.current;
+        section.scrollTo({
+            top: section.scrollHeight + 150,
+            behavior: "smooth",
+        });
+    };
+
     const handleNewTask = () => {
+        setSelectedCategory(null);
         const newTask = {
             taskId: Math.floor(Math.random() * 1000),
             name: "",
@@ -99,6 +109,10 @@ export default function Task() {
         };
         setNewItems([...newItems, newTask]);
     };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [newItems]);
 
     const taskData =
         selectedCategory !== null
@@ -111,6 +125,7 @@ export default function Task() {
         <div className="flex flex-col py-6 w-full h-full">
             <div className="px-8 w-full" key={1}>
                 <div
+                    key={923}
                     id="chat-search"
                     className="flex items-center justify-between"
                 >
@@ -148,7 +163,8 @@ export default function Task() {
                 </div>
             </div>
             <div
-                key={2}
+                ref={containerRef}
+                key={232}
                 className={`overflow-auto ${
                     (tasks.isLoading || !taskData) &&
                     "flex items-center justify-center h-full"
