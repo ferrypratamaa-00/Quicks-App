@@ -1,13 +1,62 @@
-import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { toggleDetail } from "@/redux/actions/actionMenuSlice";
+import { differenceInDays, format, parseISO } from "date-fns";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function ListHeader({
+const ActionMenu = (menuPosition) => {
+    console.log("menu", menuPosition);
+    return (
+        <div
+            className="flex flex-col z-20 w-20 bg-white border rounded"
+            style={{
+                position: "absolute",
+                left: `385px`,
+                top: `50px`,
+            }}
+        >
+            <div>
+                <button className="bg-white w-full rounded-none hover:bg-primary-light text-xs text-indicator-red py-0 h-7">
+                    Delete
+                </button>
+            </div>
+        </div>
+    );
+};
+
+const ListHeader = ({
+    id,
+    name,
+    date,
     isCompleted = false,
     isOpen,
     handleOpen,
-}) {
+}) => {
+    const dispatch = useDispatch();
+    const containerRef = useRef(null);
+    const actionMenu = useSelector((state) => state.actionMenu.detail);
+    const currentDate = new Date();
+    const formattedDate = date !== "" ? format(date, "dd/MM/yyyy") : "";
+    const diffrentDate =
+        date !== "" ? differenceInDays(parseISO(date), currentDate) : "";
+
     const [state, setState] = useState({
+        open: false,
         checked: isCompleted,
+        menuPosition: {
+            x: 0,
+            y: 0,
+        },
     });
+
+    const handleState = (key, value) => {
+        setState((prevState) => {
+            return {
+                ...prevState,
+                [key]: value,
+            };
+        });
+    };
 
     const handleChange = (e) => {
         const isChecked = e.target.checked;
@@ -17,8 +66,29 @@ export default function ListHeader({
         }));
     };
 
+    const selectedMessage = (id, event) => {
+        event.stopPropagation();
+        const containerRect = containerRef.current.getBoundingClientRect();
+        handleState("menuPosition", {
+            x: event.clientX - containerRect.left,
+            y: event.clientY - containerRect.top,
+        });
+        handleState("open", true);
+        dispatch(toggleDetail({ key: "task", id: id }));
+    };
+
+    useEffect(() => {
+        console.log("opened : ", state.open);
+    }, [state.open]);
+
     return (
-        <div className="flex flex-row items-center gap-x-1 mb-3">
+        <div
+            className="flex flex-row items-center gap-x-1 mb-3"
+            ref={containerRef}
+        >
+            {actionMenu.task === id && (
+                <ActionMenu menuPosition={state.menuPosition} />
+            )}
             <div className="w-[5%]">
                 <input
                     type="checkbox"
@@ -28,25 +98,33 @@ export default function ListHeader({
                 />
             </div>
             <div
-                className={`w-[62%] text-primary-dark text-xs font-bold ${
+                className={`w-[62%] text-primary-dark text-xs font-bold line-clamp-2 ${
                     isCompleted && "text-primary-grey line-through"
                 }`}
+                title={name}
             >
-                Close off Case #012920 - RODRIGUES, Amiguel
+                {name == "" ? (
+                    <Input
+                        placeholder="Type Task Title"
+                        className="text-xs font-normal"
+                    />
+                ) : (
+                    name
+                )}
             </div>
             <div
                 className={`w-[13%] text-indicator-red text-[10px] ${
                     isCompleted && "text-primary-grey"
                 }`}
             >
-                2 Days Left
+                {date !== "" ? `${diffrentDate} Days Left` : ""}
             </div>
             <div
                 className={`w-[13%] text-primary-dark text-[10px] ${
                     isCompleted && "text-primary-grey"
                 }`}
             >
-                12/06/2024
+                {date !== "" ? formattedDate : ""}
             </div>
             <div
                 className={`w-[3.5%] text-primary-dark transform  flex justify-center transition-all ${
@@ -55,8 +133,8 @@ export default function ListHeader({
                 onClick={handleOpen}
             >
                 <svg
-                    width="10"
-                    height="8"
+                    width="12"
+                    height="10"
                     viewBox="0 0 10 8"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -67,10 +145,13 @@ export default function ListHeader({
                     />
                 </svg>
             </div>
-            <div className="w-[3.5%] pt-1 text-primary-dark">
+            <div
+                className="w-[3.5%] pt-1 text-primary-dark"
+                onClick={(e) => selectedMessage(id, e)}
+            >
                 <svg
-                    width="14"
-                    height="4"
+                    width="12"
+                    height="5"
                     viewBox="0 0 14 4"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -85,4 +166,6 @@ export default function ListHeader({
             </div>
         </div>
     );
-}
+};
+
+export default ListHeader;

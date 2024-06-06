@@ -3,8 +3,19 @@ import ListHeader from "./ListHeader";
 import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import ListBody from "./ListBody";
 
-export default function ListItem(props) {
-    const { isCompleted } = props;
+export default function ListItem({ data }) {
+    const {
+        id,
+        userId,
+        taskCategoriesId,
+        name,
+        date,
+        description,
+        isCompleted,
+        createdAt,
+        updatedAt,
+    } = data;
+
     const isCompletedValue = isCompleted ? true : false;
     const [isOpen, setIsOpen] = useState(false);
 
@@ -26,23 +37,27 @@ export default function ListItem(props) {
         }
     };
 
-    console.log(status());
     return (
-        <div className="h-full overflow">
-            <Collapsible
-                open={status()}
-                onOpenChange={setIsOpen}
-                className="flex flex-col"
-            >
-                <ListHeader
-                    isCompleted={isCompletedValue}
-                    isOpen={status()}
-                    handleOpen={handleOpen}
+        <Collapsible
+            open={status()}
+            onOpenChange={setIsOpen}
+            className="flex flex-col"
+        >
+            <ListHeader
+                id={id}
+                name={name}
+                date={date}
+                isCompleted={isCompletedValue}
+                isOpen={status()}
+                handleOpen={handleOpen}
+            />
+            <CollapsibleContent className="space-y-2">
+                <ListBody
+                    dated={date}
+                    className={"cursor-pointer"}
+                    description={description}
                 />
-                <CollapsibleContent className="space-y-2">
-                    <ListBody />
-                </CollapsibleContent>
-            </Collapsible>
-        </div>
+            </CollapsibleContent>
+        </Collapsible>
     );
 }
